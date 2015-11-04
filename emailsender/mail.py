@@ -9,7 +9,7 @@ from email import Encoders
 
 
 def send_mail(host=None, port=None, login=None, password=None, sender=None,
-              to=None, reply_to=None, subject=None, text=None, html=None,
+              to=None, cc=None, reply_to=None, subject=None, text=None, html=None,
               tls=None, debuglevel=2, attachments=None, flood=1):
     """ Send email routine """
 
@@ -18,6 +18,7 @@ def send_mail(host=None, port=None, login=None, password=None, sender=None,
     msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = to
+    msg['Cc'] = cc
     if reply_to:
         msg['Reply-To'] = reply_to
 
@@ -66,6 +67,7 @@ def main():
     parser.add_argument("--password", required=True, help="Auth password")
     parser.add_argument("--sender", required=False, default="john.doe@example.org", help="Sender email address")
     parser.add_argument("--to", required=False, default="jane.doe@example.org", help="Receiver email address")
+    parser.add_argument("--cc", required=False, default=None, help="CC email addresses (comma separated)")
     parser.add_argument("--subject", required=True, help="Email subject")
     parser.add_argument("--text", required=True, help="Email body (plain text)")
     parser.add_argument("--html", required=False, default="", help="Email body (html)")
