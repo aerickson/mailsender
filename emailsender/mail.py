@@ -18,7 +18,9 @@ def send_mail(host=None, port=None, login=None, password=None, sender=None,
     msg['Subject'] = subject
     msg['From'] = sender
     msg['To'] = to
-    msg['Cc'] = cc
+    if cc:
+        msg['Cc'] = cc
+        to = [to] + cc.split(',')
     if reply_to:
         msg['Reply-To'] = reply_to
 
